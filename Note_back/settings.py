@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -81,22 +85,12 @@ WSGI_APPLICATION = 'Note_back.wsgi.application'
 #     }
 # }
 
-# Use environment variables for sensitive data
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'exampledbnote',          # Replace with your database name
-        'USER': 'exampledbnote_user',     # Replace with your database username
-        'PASSWORD': '67HJ3qdJvlAsejzh3a49DydvpSXljx6f',  # Replace with your database password
-        'HOST': 'dpg-cq1o9fjv2p9s73d533hg-a',  # Replace with your Render database hostname
-        'PORT': '5432',                   # Replace with your Render database port
-    }
-}
 
-# Example of using environment variables
-if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
+
+import dj_database_url
+DATABASES = {
+    'default' : dj_database_url.parse(env('DATABASE_URL'))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
