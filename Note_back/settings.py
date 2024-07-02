@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'Note_back.wsgi.application'
 
 import dj_database_url
 DATABASES = {
-    'default' : dj_database_url.parse(env('DATABASE_URL'))
+    'default' : dj_database_url.parse('postgresql://productiondb_irbc_user:cjLpTiT7h8hOX0ztRGBgNRossMdbUyAj@dpg-cq1qjhbv2p9s73d68s00-a.ohio-postgres.render.com/productiondb_irbc')
 }
 
 # Password validation
