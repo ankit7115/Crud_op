@@ -80,10 +80,24 @@ WSGI_APPLICATION = 'Note_back.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-import dj_database_url
+
+# Use environment variables for sensitive data
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'exampledbnote',          # Replace with your database name
+        'USER': 'exampledbnote_user',     # Replace with your database username
+        'PASSWORD': '67HJ3qdJvlAsejzh3a49DydvpSXljx6f',  # Replace with your database password
+        'HOST': 'dpg-cq1o9fjv2p9s73d533hg-a',  # Replace with your Render database hostname
+        'PORT': '5432',                   # Replace with your Render database port
+    }
 }
+
+# Example of using environment variables
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
